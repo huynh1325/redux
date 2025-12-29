@@ -4,8 +4,8 @@ export const increaseCounter = () => {
 
     return {
 
-        type: INCREMENT,
-
+        type: INCREMENT, //name
+        payload: {like: 'buymilk', name: 'huynh'}
     };
 
 };
