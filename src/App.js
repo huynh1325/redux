@@ -5,9 +5,7 @@ import {
   increaseCounter,
   decreaseCounter,
 } from "./action/actions"
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import Home from './components/Home';
 
 function App(props) {
@@ -21,16 +19,6 @@ function App(props) {
   const handleIncrease = () => {
     dispatch(increaseCounter())
   }
-
-  const fetchAllUser = async () => {
-    const res = await axios.get("http://localhost:8080/users/all");
-    const data = res && res.data ? res.data : []
-    console.log("check data: ", res.data)
-  }
-
-  useEffect(() => {
-    fetchAllUser();
-  }, [])
 
   return (
     // <div className="App">
