@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchAllUsers } from '../action/actions';
+import { deleteUserRedux, fetchAllUsers } from '../action/actions';
 import { useSelector } from 'react-redux';
 
 const TableUser = (props) => {
@@ -16,8 +16,8 @@ const TableUser = (props) => {
         dispatch(fetchAllUsers());
     }, [dispatch])
 
-    const handleDeleteUser = (user) => {
-        console.log(user)
+    const handleDeleteUser = (item) => {
+        dispatch(deleteUserRedux(item.id));
     }
 
     return (
