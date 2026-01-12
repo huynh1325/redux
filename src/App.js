@@ -3,20 +3,30 @@ import './App.css';
 import { Counter } from './redux/slices/Counter';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
+import { fetchAllUsers } from './redux/slices/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
+  const dispatch = useDispatch();
 
-  const [listUsers, setListUsers] = useState([]);
+  const listUsers = useSelector(state => state.user.listUsers);
+  const isLoading = useSelector(state => state.user.isLoading);
+  const isError = useSelector(state => state.user.isError);
 
   useEffect(() => {
-    fetchAllUsers();
+    dispatch(fetchAllUsers());
   }, [])
+
+  if (isError === true && isLoading === false) {
+    return (
+      <div>Something wrongs. Please try again!</div>
+    )
+  }
   
-  const fetchAllUsers = async () => {
-    let res = await axios.get("http://localhost:8080/users/all");
-    setListUsers(res.data ? res.data : []);
-    console.log(res.data)
+  if (isError === false && isLoading === true) {
+    return (
+      <div>Loading data...</div>
+    )
   }
 
   return (
